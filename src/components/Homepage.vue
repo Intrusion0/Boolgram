@@ -59,6 +59,7 @@ export default {
 // Main
 main {
   background-color: #fafafa;
+  padding: 50px 0;
 
   #container-left, #container-right {
     display: inline-block;
