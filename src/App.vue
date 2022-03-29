@@ -45,5 +45,28 @@ export default {
   margin: 0 auto;
 }
 
+// General rules for profile pictures
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+// General rules for profiles
+.container-profile {
+  // Profile info 
+  .profile-info {
+    span {
+      display: block;
+    }
+  }
+}
+
+// Profile cta
+.cta {
+  color: #0095f6;
+  font-weight: 700;
+  cursor: pointer;
+}
 
 </style>
