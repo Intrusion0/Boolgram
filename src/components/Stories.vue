@@ -45,13 +45,10 @@ export default {
 #container-stories {
     width: 100%;
     border: 2px solid #efefef;
-    padding: 20px;
+    padding: 35px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    // debug
-    // height: 100px;
-    // background-color: aquamarine;
 }
 
 </style>

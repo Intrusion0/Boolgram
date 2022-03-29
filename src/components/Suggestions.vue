@@ -62,10 +62,7 @@ export default {
 // Container stories
 #container-suggestions {
   width: 100%;
-  padding-bottom: 20px;
-  // debug
-  // height: 300px;
-  // background-color: darksalmon;
+  padding: 28px 0 20px;
 
   .suggestions-head {
     display: flex;
