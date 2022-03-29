@@ -1,26 +1,37 @@
 <template>
     <section id="container-posts">
-        <div class="container-post">
-            CIAO SONO POST 1
-        </div>
-
-        <div class="container-post">
-            CIAO SONO POST 2
-        </div>
-
-        <div class="container-post">
-            CIAO SONO POST 3
-        </div>
+        <Post 
+        v-for="post, i in posts"
+        :key="i"
+        :post="post"
+        />
     </section>
 </template>
 
 <script>
+import axios from 'axios';
+import Post from './Post.vue';
+
 export default {
-  name: 'Posts',
+    name: 'Posts',
+    components: { Post },
+
 
   data() {
     return {
+        posts: [],
+    }
+  },
+  created() {
+    this.getPosts();
+  },
 
+  methods: {
+    getPosts() {
+      axios.get('https://flynn.boolean.careers/exercises/api/boolgram/posts')
+          // .then((r) => console.log(r = r.data))
+          .then((r) => this.posts = r.data)
+          .catch((e) => console.error(e));
     }
   }
 }
@@ -34,9 +45,6 @@ export default {
 
     .container-post {
         margin: 50px 0;
-        // debug
-        height: 300px;
-        background-color: chocolate;
     }
 }
 
