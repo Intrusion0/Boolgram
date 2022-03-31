@@ -42,6 +42,10 @@ header {
     width: 100%;
     border-bottom: 1px solid #dbdbdb;
     padding: 15px 0;
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 
     #header-container {
         display: flex;
