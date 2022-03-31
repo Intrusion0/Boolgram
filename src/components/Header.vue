@@ -54,6 +54,10 @@ header {
 
         #logo {
             width: 12%;
+
+            &:hover {
+                cursor: pointer;
+            }
         }
     
         input {

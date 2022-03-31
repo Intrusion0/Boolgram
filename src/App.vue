@@ -130,12 +130,17 @@ $color-default: #ededed;
         .post-actions {
             margin-bottom: 20px;
 
-            img:first-child {
-                margin-right: 15px;
+            i {
+              font-size: 22px;
+              cursor: pointer;
             }
 
-            img:nth-child(2) {
-                transform: rotate(90deg);
+            .far:hover {
+              color: #8e8e8e;
+            }
+
+            i:first-child {
+                margin-right: 15px;
             }
         }
 
