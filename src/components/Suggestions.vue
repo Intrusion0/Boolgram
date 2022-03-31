@@ -62,7 +62,7 @@ export default {
 // Container stories
 #container-suggestions {
   width: 100%;
-  padding: 28px 0 20px;
+  padding: 0 0 20px;
 
   .suggestions-head {
     display: flex;
@@ -72,14 +72,15 @@ export default {
 
     .for-you {
       color: #8E8E8E;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
     }
 
     .show-all {
       color: #262626;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 500;
+      cursor: pointer;
     }
   }
 
