@@ -22,13 +22,14 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+$color-default: #ededed;
+
 // General rules
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-
 }
 
 // Clearfix / float
@@ -124,7 +125,7 @@ export default {
 
     .main-post {
         font-size: 14px;
-        padding: 20px;
+        padding: 20px 20px 12px;
 
         .post-actions {
             margin-bottom: 20px;
@@ -236,6 +237,88 @@ export default {
             }
         }
     }
+}
+
+// General rules -> component story
+.story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    .profile-picture {
+        margin-bottom: 5px;
+        border: 3px solid #c62d90;
+        padding: 1px;
+    }
+
+    span {
+        display: block;
+        text-align: center;
+        font-size: 14px;
+        max-width: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #262626;
+    }
+}
+
+// Post/Suggestions default
+.header-post-default, .suggestions-default {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+
+  & div:first-child {
+    height: 30px;
+    width: 30px;
+    min-width: 30px;
+    border-radius: 50%;
+    background-color: $color-default;
+  }
+
+  & div:nth-child(2) {
+    width: 100%;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+
+    span {
+      display: block;
+      height: 12px;
+      background-color: $color-default;
+    }
+
+    span:first-child {
+      width: 30%;
+      margin-bottom: 3px;
+    }
+
+    span:last-child {
+      width: 20%;
+    }
+  }
+}
+
+.suggestions-default {
+  padding: 14px 0;
+
+  & div:nth-child(2) {
+
+    span {
+      border-radius: 3px;
+    }
+
+    span:first-child {
+      width: 40%;
+      margin-bottom: 3px;
+    }
+
+    span:last-child {
+      width: 28%;
+    }
+  }
 }
 
 </style>

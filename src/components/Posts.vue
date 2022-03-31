@@ -5,13 +5,8 @@
         <div class="header-post-default">
             <div></div> <!-- Profile picture default -->
             <div> <!-- Info profile default -->
-              <span>
-                
-              </span>
-
-              <span>
-
-              </span>
+              <span></span>
+              <span></span>
             </div>
         </div>
 
@@ -48,12 +43,11 @@ export default {
   methods: {
     getPosts() {
       axios.get('https://flynn.boolean.careers/exercises/api/boolgram/posts')
-          // .then((r) => console.log(r = r.data))
           .then((r) => {
-            setTimeout(() => {
+            setTimeout(() => { // Delay simulation called api
               this.posts = r.data
               console.log(this.posts);
-            }, 40000000);
+            }, 1500);
           })
           .catch((e) => console.error(e));
     }
@@ -62,7 +56,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$color-default: #ededed;
 
 // Container stories
 #container-posts {
@@ -73,48 +66,9 @@ $color-default: #ededed;
     }
 }
 
-// Post default
-.header-post-default {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 14px 16px;
-
-  & div:first-child {
-    height: 30px;
-    width: 30px;
-    min-width: 30px;
-    border-radius: 50%;
-    background-color: $color-default;
-  }
-
-  & div:nth-child(2) {
-    width: 100%;
-    margin-left: 10px;
-    display: flex;
-    flex-direction: column;
-
-    span {
-      display: block;
-      height: 12px;
-      background-color: $color-default;
-    }
-
-    span:first-child {
-      width: 30%;
-      margin-bottom: 3px;
-    }
-
-    span:last-child {
-      width: 20%;
-    }
-  }
-}
-
 .post-image-default {
   width: 100%;
   height: 650px;
-  // background-image: linear-gradient(to right, #ededed , #d9d9d9);
   transition: .5s linear;
   animation: changeBackground;
   animation-iteration-count: infinite;

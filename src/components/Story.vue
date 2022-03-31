@@ -21,26 +21,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.story {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
 
-    .profile-picture {
-        margin-bottom: 5px;
-        border: 3px solid #c62d90;
-        padding: 1px;
-    }
-
-    span {
-        display: block;
-        text-align: center;
-        font-size: 14px;
-        max-width: 60px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: #262626;
-    }
-}
 </style>
