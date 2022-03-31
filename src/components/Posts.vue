@@ -18,7 +18,25 @@
         v-for="post, i in posts"
         :key="i"
         :post="post"
+        @getComments="getComments"
         />
+
+        <!-- MODAL -->
+        <modal name="my-first-modal"
+          :height="auto"
+          :scrollable="true">
+            <div class="comments-container-modal">
+              <h2>Commenti</h2>
+                <div v-for="comment, i in comments" :key="'B' + i" class="comment-modal">
+                    <span class="username-comment-modal">
+                        {{ comment.username }} 
+                    </span> 
+                    <p class="comment-text-modal">
+                        {{ comment.text }}
+                    </p>
+                </div>
+            </div>
+        </modal>
     </section>
 </template>
 
@@ -34,6 +52,7 @@ export default {
   data() {
     return {
         posts: [],
+        comments: []
     }
   },
   created() {
@@ -46,10 +65,14 @@ export default {
           .then((r) => {
             setTimeout(() => { // Delay simulation called api
               this.posts = r.data
-              console.log(this.posts);
             }, 1500);
           })
           .catch((e) => console.error(e));
+    },
+
+    getComments(value) {
+      this.comments = value;
+      console.log(this.comments);
     }
   }
 }
@@ -66,6 +89,38 @@ export default {
     }
 }
 
+.comments-container-modal {
+  padding: 10px 20px;
+  font-size: 14px;
+
+  h2 {
+    border-bottom: 2px solid #ebebeb;
+    padding-bottom: 5px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 400;
+    color: #727272;
+  }
+
+  .comment-modal {
+
+    .username-comment-modal {
+        font-weight: 600;
+        margin-right: 5px;
+  
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
+
+    .comment-text-modal {
+      display: inline-block;
+      margin: 5px 0;
+    }
+  }
+}
+
 .post-image-default {
   width: 100%;
   height: 650px;
@@ -75,6 +130,7 @@ export default {
   animation-duration: 7s; 
 }
 
+// Animation
 @keyframes changeBackground { 
   0% {
     background-image: linear-gradient(to right, #ededed , #d9d9d9);

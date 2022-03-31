@@ -23,8 +23,8 @@
         <div class="main-post">
             <!-- post actions  -->
             <div class="post-actions">
-                <img src="@/assets/svgexport-6.png" alt="heart icon">
-                <img src="@/assets/svgexport-8.png" alt="comment">
+                <i class="far fa-heart" @click.prevent="addLike()"></i>
+                <i class="far fa-comment"></i>
             </div>
 
             <!-- post likes  -->
@@ -66,7 +66,7 @@
                 </div>
 
                 <div v-else>
-                    <span class="show-all-comments">
+                    <span class="show-all-comments" @click.prevent="show()">
                         Mostra tutti e 
                         <span> 
                             {{ post.comments.length }} 
@@ -98,7 +98,6 @@
             <button @click.prevent="getComment(comment)" class="post-comment" :disabled="comment === ''">Pubblica</button>
         </div>
 
-        
     </section>
 </template>
 
@@ -114,6 +113,7 @@ export default {
   data() {
     return {
         comment: '',
+        postComment: []
     }
   },
 
@@ -129,9 +129,38 @@ export default {
           return finalDate;
       },
 
+      // Likes Method
+      addLike() {
+
+          let like = {
+              profile_picture: 'http://loredanavistarini.it/wp-content/uploads/2020/01/136-1366211_group-of-10-guys-login-user-icon-png.png',
+              username: this.post.profile_name
+          };
+          
+          if (this.$el.querySelector('.heart-bg')) {
+              this.$el.querySelector('.fa-heart').classList.remove('fas','heart-bg');
+              this.$el.querySelector('.fa-heart').classList.add('far');
+              this.post.likes.splice(this.post.likes.length-1, 1);
+          } else {
+              this.$el.querySelector('.fa-heart').classList.remove('far');
+              this.$el.querySelector('.fa-heart').classList.add('fas','heart-bg');
+              this.post.likes.push(like);
+          }
+      },
+
       getComment(comment) {
           console.log('ciao', comment);
           this.comment = '';
+      },
+
+      show () {
+          this.$modal.show('my-first-modal');
+
+          this.$emit('getComments', this.post.comments);
+      },
+
+      hide () {
+          this.$modal.hide('my-first-modal');
       }
   }
 }
@@ -150,5 +179,9 @@ export default {
 
 #text-likes {
     font-weight: 400;
+}
+
+.heart-bg {
+    color: red;
 }
 </style>
