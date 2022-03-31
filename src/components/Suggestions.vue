@@ -1,33 +1,52 @@
 <template>
-    <section id="container-suggestions">
-        <!-- SONO SUGGESTIONS -->
-        <div class="suggestions-head">
-          <span class="for-you">Suggerimenti per te</span>
-          <span class="show-all">Mostra tutti</span>
+
+  <section v-if="suggestedProfiles.length === 0" id="container-suggestions">
+
+    <div class="suggestions-head">
+      <span class="for-you">Suggerimenti per te</span>
+      <span class="show-all">Mostra tutti</span>
+    </div>
+
+    <div class="suggestions" v-for="(defProf, i) in defaultSuggestedProfiles" :key="'A' + i">
+        <div class="suggestions-default" >
+            <div></div> <!-- Profile picture default -->
+            <div> <!-- Info profile default -->
+              <span></span>
+              <span></span>
+            </div>
         </div>
+    </div>
+  </section>
 
-        <div class="suggestions">
-          <div 
-          v-for="suggestedProfile, i in suggestedProfiles"
-          :key="i"
-          class="suggestedProfile">
-            <div class="container-profile">
-              <div class="picture">
-                <img :src="suggestedProfile.profile_picture" alt="profile-picture" class="profile-picture">
-              </div>
+  <section v-else id="container-suggestions">
+      <!-- SUGGESTIONS -->
+      <div class="suggestions-head">
+        <span class="for-you">Suggerimenti per te</span>
+        <span class="show-all">Mostra tutti</span>
+      </div>
 
-              <div class="profile-info">
-                <span> {{ suggestedProfile.profile_name }} </span>
-              </div>
+      <div class="suggestions">
+        <div 
+        v-for="suggestedProfile, i in suggestedProfiles"
+        :key="i"
+        class="suggestedProfile">
+          <div class="container-profile">
+            <div class="picture">
+              <img :src="suggestedProfile.profile_picture" alt="profile-picture" class="profile-picture">
             </div>
 
-            <!-- Profile cta (call to action) -->
-            <span class="cta">
-              Segui
-            </span>
+            <div class="profile-info">
+              <span> {{ suggestedProfile.profile_name }} </span>
+            </div>
           </div>
+
+          <!-- Profile cta (call to action) -->
+          <span class="cta">
+            Segui
+          </span>
         </div>
-    </section>
+      </div>
+  </section>
 </template>
 
 <script>
@@ -39,6 +58,7 @@ export default {
   data() {
     return {
       suggestedProfiles: [],
+      defaultSuggestedProfiles: [1,2,3,4,5,6,7,8]
     }
   },
 
@@ -49,8 +69,11 @@ export default {
   methods: {
     getSuggestedProfiles() {
       axios.get('https://flynn.boolean.careers/exercises/api/boolgram/profiles')
-          // .then((r) => console.log(r = r.data))
-          .then((r) => this.suggestedProfiles = r.data)
+          .then((r) => {
+            setTimeout(() => { // Delay simulation called api
+              this.suggestedProfiles = r.data;
+            }, 1500);
+          })
           .catch((e) => console.error(e));
     }
   }
