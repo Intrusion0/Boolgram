@@ -1,7 +1,19 @@
 <template>
     <section id="container-stories">
-        <!-- SONO STORIES -->
-        <Story 
+
+        <div v-if="stories.length === 0" class="container-default-stories">
+          <div id="skeleton-loading">
+            <img src="@/assets/spinner.gif" alt="loading gif">
+          </div>
+
+          <div v-for="(defaultStory, j) in storiesDefault" class="story" :key="j">
+            <div class="profile-picture-default">
+              
+            </div>
+          </div>
+        </div>
+
+        <Story v-else
         v-for="story, i in stories"
         :key="i"
         :details="story"/>
@@ -21,6 +33,7 @@ export default {
   data() {
     return {
       stories: [],
+      storiesDefault: [1,2,3,4,5,6,7,8]
     }
   },
 
@@ -31,8 +44,11 @@ export default {
   methods: {
     getStories() {
       axios.get('https://flynn.boolean.careers/exercises/api/boolgram/profiles')
-          // .then((r) => console.log(r = r.data))
-          .then((r) => this.stories = r.data)
+          .then((r) => {
+            setTimeout(() => { // Delay simulation called api
+              this.stories = r.data;
+            }, 1500);
+          })
           .catch((e) => console.error(e));
     }
   }
@@ -51,5 +67,33 @@ export default {
     justify-content: space-evenly;
     align-items: center;
 }
+
+.container-default-stories {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  #skeleton-loading {
+    width: 100%;
+    display: block;
+    text-align: center;
+
+    img {
+      width: 5%;
+      margin-bottom: 10px;
+    }
+  }
+
+  .profile-picture-default {
+    height: 50px;
+    width: 50px;
+    min-width: 50px;
+    border: 1px solid #cbcbcb;
+    border-radius: 50%;
+    background-color: #ededed;
+  }
+}
+
 
 </style>
