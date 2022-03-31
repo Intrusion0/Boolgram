@@ -69,7 +69,7 @@ export default {
 // Main
 main {
   background-color: #fafafa;
-  padding: 50px 0;
+  padding: 25px 0;
 
   #container-left, #container-right {
     display: inline-block;
@@ -81,9 +81,13 @@ main {
   }
 
   #container-right {
-    width: 40%;
+    width: 35%;
     float: right;
-    padding-left: 40px;
+    padding: 8px 16px 8px 0;
+    font-size: 14px;
+    line-height: 18px;
+    position: sticky;
+    top: 97px; // Perfect pixel :P
 
     #container-account, .container-profile {
       display: flex;
@@ -94,10 +98,7 @@ main {
     // Container account
     #container-account {
       width: 100%;
-      padding: 20px 0;
-      // debug
-      // height: 100px;
-      // background-color: darkviolet;
+      padding: 20px 0 10px;
 
       .container-profile {
         // Profile picture
@@ -126,7 +127,9 @@ main {
 
     footer {
       text-transform: uppercase;
-      color: #C7C7C7;
+      color: #cccccc;
+      font-size: 12px;
+      line-height: 16px;
     }
   }
 }
