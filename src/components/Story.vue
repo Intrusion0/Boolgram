@@ -37,7 +37,7 @@ export default {
         display: block;
         text-align: center;
         font-size: 14px;
-        max-width: 65px;
+        max-width: 60px;
         overflow: hidden;
         text-overflow: ellipsis;
         color: #262626;
