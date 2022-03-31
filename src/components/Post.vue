@@ -5,7 +5,7 @@
             <div>
                 <img :src="post.profile_picture" :alt="post.profile_name" class="profile-picture-post">
                 <span>
-                    {{ post.profile_fullname }}
+                    {{ post.profile_name }}
                 </span>
             </div>
 
@@ -42,7 +42,7 @@
             <div class="comments-container">
                 <span v-if="post.comments.length === 0" class="no-comment">Nessun commento</span>
 
-                <div v-else-if="post.comments.length > 0 && post.comments.length < 3">
+                <div v-else-if="post.comments.length > 0 && post.comments.length <= 3">
                     <div v-for="comment, i in post.comments" :key="i" class="comment">
                         <span class="username-comment">{{ comment.username }} </span> 
                         <p class="comment-text">{{ comment.text }}</p>
@@ -63,11 +63,12 @@
 
             </span>
 
-            <!-- add comment  -->
-            <div class="add-comment">
-                <input type="text" placeholder="Aggiungi un commento" class="input-comment">
-                <span class="post-comment">Pubblica</span>
-            </div>
+        </div>
+
+        <!-- add comment  -->
+        <div class="add-comment">
+            <input type="text" placeholder="Aggiungi un commento..." class="input-comment" v-model="comment">
+            <button @click.prevent="getComment(comment)" class="post-comment" :disabled="comment === ''">Pubblica</button>
         </div>
 
         
@@ -83,130 +84,19 @@ export default {
 
   data() {
     return {
-
+        comment: '',
     }
+  },
+
+  methods: {
+      getComment(comment) {
+          console.log('ciao', comment);
+          this.comment = '';
+      }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.post {
-    margin: 50px 0;
-    border: 2px solid #efefef;
-
-    .header-post {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 10px;
-
-        & > div {
-            display: flex;
-            align-items: center;
-
-            span {
-                margin-left: 10px;
-            }
-        }
-
-        .profile-picture-post {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            border: 3px solid #c62d90;
-            padding: 1px;
-        }
-    }
-
-    .post-image {
-
-        img {
-            width: 100%;
-            max-height: 650px;
-        }
-    }
-
-    .main-post {
-        padding: 20px;
-
-        .post-actions {
-            margin-bottom: 20px;
-
-            img:first-child {
-                margin-right: 15px;
-            }
-
-            img:nth-child(2) {
-                transform: rotate(90deg);
-            }
-        }
-
-        .likes > img {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .likes {
-            display: flex;
-            align-items: center;
-
-            .profile-name, .total-likes {
-                font-weight: 600;
-            }
-        }
-
-        .post-description {
-            margin: 20px 0;
-
-            span {
-                font-weight: 600;
-            }
-        }
-
-        .comments-container {
-            .username-comment {
-                font-weight: 600;
-                margin-right: 5px;
-            }
-
-            .show-all-comments {
-                color: #8E8E8E;
-                cursor: pointer;
-            }
-
-            .no-comment, .comment-text {
-                display: inline-block;
-            }
-
-            .comment {
-                margin: 5px 0;
-            }
-
-        }
-
-        .add-comment {
-            border: 1px solid #efefef;
-            display: flex;
-            justify-content: space-between;
-
-            .input-comment {
-                width: 90%;
-                border: transparent;
-
-                &:focus-visible {
-                    outline: none;
-                }
-            }
-
-            .post-comment {
-                color: #addeff;
-            }
-        }
-    }
-}
-
 
 </style>
