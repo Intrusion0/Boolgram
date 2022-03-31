@@ -45,7 +45,8 @@ export default {
 #container-stories {
     width: 100%;
     border: 2px solid #efefef;
-    padding: 35px;
+    border-radius: 3px;
+    padding: 16px 0;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
