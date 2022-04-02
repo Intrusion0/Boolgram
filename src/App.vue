@@ -32,6 +32,10 @@ $color-default: #ededed;
   font-family: 'Roboto', sans-serif;
 }
 
+p {
+  margin-bottom: 0;
+}
+
 // Clearfix / float
 .clearfix::after {
   display: table;
