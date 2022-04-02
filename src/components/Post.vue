@@ -25,6 +25,8 @@
             <div class="post-actions">
                 <i class="far fa-heart" @click.prevent="addLike()"></i>
                 <i class="far fa-comment"></i>
+                <img src="@/assets/svgexport-10.svg" alt="" class="share-post">
+                <img src="@/assets/svgexport-12.svg" alt="" class="float-end">
             </div>
 
             <!-- post likes  -->
@@ -182,6 +184,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.post-actions {
+    .share-post {
+        position: relative;
+        margin-left: 12px;
+        bottom: 3px;
+    }
+}
 
 .post-date {
     letter-spacing: .2px;
