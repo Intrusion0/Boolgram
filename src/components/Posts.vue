@@ -22,9 +22,7 @@
         />
 
         <!-- MODAL -->
-        <modal name="my-first-modal"
-          :height="auto"
-          :scrollable="true">
+        <modal name="container-comments">
             <div class="comments-container-modal">
               <h2>Commenti</h2>
                 <div v-for="comment, i in comments" :key="'B' + i" class="comment-modal">

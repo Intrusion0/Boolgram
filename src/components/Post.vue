@@ -3,7 +3,7 @@
         <div class="header-post">
 
             <div>
-                <img :src="post.profile_picture" :alt="post.profile_name" class="profile-picture-post">
+                <img :src="post.profile_picture" :alt="post.profile_name" class="profile-picture-post" @click.prevent="showStory">
                 <span>
                     {{ post.profile_name }}
                 </span>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div v-else>
-                    <span class="show-all-comments" @click.prevent="show()">
+                    <span class="show-all-comments" @click.prevent="showComments()">
                         Mostra tutti e 
                         <span> 
                             {{ post.comments.length }} 
@@ -74,7 +74,7 @@
                         commenti 
                     </span>
 
-                    <div v-for="comment, i in post.comments.slice(0,3)" :key="i" class="comment">
+                    <div v-for="comment, i in post.comments.slice(-3)" :key="i" class="comment">
                         <span class="username-comment">
                             {{ comment.username }} 
                         </span> 
@@ -94,7 +94,7 @@
 
         <!-- add comment  -->
         <div class="add-comment">
-            <input type="text" placeholder="Aggiungi un commento..." class="input-comment" v-model="comment">
+            <input @keyup.13="getComment(comment)" type="text" placeholder="Aggiungi un commento..." class="input-comment" v-model="comment">
             <button @click.prevent="getComment(comment)" class="post-comment" :disabled="comment === ''">Pubblica</button>
         </div>
 
@@ -150,17 +150,32 @@ export default {
 
       getComment(comment) {
           console.log('ciao', comment);
+          this.post.comments.push(
+            {
+              text: comment,
+              username: this.post.profile_name
+            }
+          );
           this.comment = '';
+          console.log(this.post.comments);
       },
 
-      show () {
-          this.$modal.show('my-first-modal');
+      showComments() {
+          this.$modal.show('container-comments');
 
           this.$emit('getComments', this.post.comments);
       },
 
-      hide () {
-          this.$modal.hide('my-first-modal');
+      hideComments() {
+          this.$modal.hide('container-comments');
+      },
+
+      showStory() {
+        this.$modal.show('container-story');
+      },
+
+      hideStory() {
+        this.$modal.hide('container-story');
       }
   }
 }
