@@ -1,5 +1,5 @@
 <template>
-    <div class="story">
+    <div class="story" @click.prevent="showStory()">
         <img :src="details.profile_picture" alt="profile-picture" class="profile-picture">
         <span> {{ details.profile_name }} </span>
     </div>
@@ -15,6 +15,16 @@ export default {
   data() {
     return {
 
+    }
+  },
+
+  methods: {
+    showStory () {
+        this.$modal.show('container-story');
+    },
+
+    hideStory () {
+        this.$modal.hide('container-story');
     }
   }
 }

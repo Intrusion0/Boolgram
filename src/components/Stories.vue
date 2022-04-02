@@ -16,7 +16,38 @@
         <Story v-else
         v-for="story, i in stories"
         :key="i"
-        :details="story"/>
+        :details="story"
+        />
+
+        <!-- MODAL -->
+        <modal name="container-story"
+        :top="150"
+        :height="700"
+        :width="500">
+            <div class="container-stories-modal">
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="@/assets/landscape.gif" class="d-block w-100" alt="default image story 1">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="@/assets/1.jpg" class="d-block w-100" alt="default image story 2">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="@/assets/2.jpg" class="d-block w-100" alt="default image story 3">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+        </modal>
     </section>
 </template>
 
@@ -33,7 +64,8 @@ export default {
   data() {
     return {
       stories: [],
-      storiesDefault: [1,2,3,4,5,6,7,8]
+      storiesDefault: [1,2,3,4,5,6,7,8],
+      imageStory: '',
     }
   },
 
@@ -50,7 +82,7 @@ export default {
             }, 1500);
           })
           .catch((e) => console.error(e));
-    }
+    },
   }
 }
 </script>
@@ -92,6 +124,15 @@ export default {
     border: 1px solid #cbcbcb;
     border-radius: 50%;
     background-color: #ededed;
+  }
+}
+
+.container-stories-modal {
+
+  img {
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
   }
 }
 
