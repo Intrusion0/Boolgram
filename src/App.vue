@@ -36,6 +36,24 @@ p {
   margin-bottom: 0;
 }
 
+// Modal
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.65);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 // Clearfix / float
 .clearfix::after {
   display: table;
@@ -80,7 +98,7 @@ p {
 }
 
 // General rules -> component post
-.post {
+.post, .header-comments {
     margin: 25px 0;
     border: 2px solid #efefef;
     border-radius: 3px;

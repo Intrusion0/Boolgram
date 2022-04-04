@@ -94,8 +94,8 @@
 
         <!-- add comment  -->
         <div class="add-comment">
-            <input @keyup.13="getComment(comment)" type="text" placeholder="Aggiungi un commento..." class="input-comment" v-model="comment">
-            <button @click.prevent="getComment(comment)" class="post-comment" :disabled="comment === ''">Pubblica</button>
+            <input @keyup.13="addComment(comment)" type="text" placeholder="Aggiungi un commento..." class="input-comment" v-model="comment">
+            <button @click.prevent="addComment(comment)" class="post-comment" :disabled="comment === ''">Pubblica</button>
         </div>
 
     </section>
@@ -148,7 +148,7 @@ export default {
           }
       },
 
-      getComment(comment) {
+      addComment(comment) {
           console.log('ciao', comment);
           this.post.comments.push(
             {
@@ -161,13 +161,11 @@ export default {
       },
 
       showComments() {
-          this.$modal.show('container-comments');
-
-          this.$emit('getComments', this.post.comments);
+        this.$emit('getComments', this.post.comments, this.post);
       },
 
       hideComments() {
-          this.$modal.hide('container-comments');
+        this.$modal.hide('container-comments');
       },
 
       showStory() {
