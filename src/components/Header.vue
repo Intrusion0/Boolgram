@@ -9,19 +9,35 @@
                 <input type="text" placeholder="Cerca">
                 
                 <div class="profile-actions">
-                    <!-- Heart -->
-                    <span>
-                        <i class="far fa-heart"></i>
-                    </span>
-                    
                     <!-- Home -->
                     <span>
-                        <i class="fa-solid fa-house-chimney"></i>
+                        <img src="@/assets/svgexport-18.svg" alt="">
+                    </span>
+
+                    <span class="position-relative">
+                        <img src="@/assets/svgexport-10.svg" alt="">
+                        <span class="position-absolute translate-middle badge notifications">
+                            2
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                    </span>
+
+                    <span>
+                        <img src="@/assets/svgexport-20.svg" alt="">
+                    </span>
+
+                    <span>
+                        <img src="@/assets/svgexport-21.svg" alt="">
+                    </span>
+                    
+                    <!-- Heart -->
+                    <span>
+                        <img src="@/assets/svgexport-22.svg" alt="">
                     </span>
 
                     <!-- Profile picture -->
                     <span>
-                        <img src="@/assets/profile.jpg" alt="profile-picture">
+                        <img src="@/assets/profile.jpg" alt="profile-picture" class="profile-picture">
                     </span>
                 </div>
             </div>
@@ -74,7 +90,6 @@ header {
 
             &:focus-visible {
                 outline: none;
-                // background-image: none;
             }
         }
 
@@ -84,12 +99,17 @@ header {
 
             span {
                 font-size: 23px;
-                margin-left: 20px;
+                margin-left: 25px;
 
                 img {
-                    width: 35px;
-                    height: 35px;
-                    border-radius: 50%;
+                    width: 28px;
+                    height: 30px;
+
+                    &.profile-picture {
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 50%;
+                    }
 
                     &:hover {
                         cursor: pointer;
@@ -98,6 +118,15 @@ header {
 
                 i:hover {
                     cursor: pointer;
+                }
+
+                &.notifications {
+                    top: 5px;
+                    left: 3px;
+                    font-size: 12px;
+                    background-color: #ed4956;
+                    border-radius: 50%;
+                    padding: 4px 7px;
                 }
             }
         }
