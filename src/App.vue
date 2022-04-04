@@ -228,40 +228,38 @@ p {
             .comment {
                 margin: 5px 0;
             }
-
         }
+    }
+}
 
+.add-comment {
+    border-top: 1px solid #efefef;
+    padding: 15px 20px;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: space-between;
+
+    .input-comment {
+        width: 90%;
+        border: transparent;
+        background-color: #fafafa;
+        font-size: 15px;
+
+        &:focus-visible {
+            outline: none;
+        }
     }
 
-    .add-comment {
-        border-top: 1px solid #efefef;
-        padding: 15px 20px;
-        background-color: #fafafa;
-        display: flex;
-        justify-content: space-between;
+    button {
+        background: transparent;
+        border: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: #0095f6;
+        cursor: pointer;
 
-        .input-comment {
-            width: 90%;
-            border: transparent;
-            background-color: #fafafa;
-            font-size: 15px;
-
-            &:focus-visible {
-                outline: none;
-            }
-        }
-
-        button {
-            background: transparent;
-            border: 0;
-            font-size: 14px;
-            font-weight: 600;
-            color: #0095f6;
-            cursor: pointer;
-
-            &:disabled {
-                color: #b2dffc;
-            }
+        &:disabled {
+            color: #b2dffc;
         }
     }
 }
@@ -346,6 +344,20 @@ p {
       width: 28%;
     }
   }
+}
+
+// Container post date
+.post-date {
+    letter-spacing: .2px;
+    color: #8e8e8e;
+    font-size: 10px;
+    line-height: 12px;
+    text-transform: uppercase;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+
+.heart-bg {
+    color: red;
 }
 
 </style>

@@ -21,97 +21,22 @@
         @getComments="getComments"
         />
 
-      <div v-if="myModel">
-        <transition name="model">
-        <div class="modal-mask">
-          <div class="modal-wrapper">
-
-            <span id="close-modal" @click.prevent="closeModal">
-              &#10005;
-            </span>
-
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-            <!-- <div class="modal-header">
-              <h2>Commenti</h2>
-            </div> -->
-            
-            <div class="modal-body">
-              <div class="container-image-post">
-                <img :src="post.post_image" :alt="post.text">
-              </div>
-
-              <div class="container-info-post">
-                <div class="header-comments">
-                  <div class="header-post">
-                    <div>
-                        <img :src="post.profile_picture" :alt="post.profile_name" class="profile-picture-post">
-                        <span>
-                            {{ post.profile_name }}
-                        </span>
-                        <span id="dot">•</span>
-                        <span>Segui gi&agrave;</span>
-                    </div>
-
-                    <div>
-                        <img src="@/assets/svgexport-3.png" alt="three dots">
-                    </div>
-                  </div>
-                </div>
-                <div class="main-comments">
-
-                  <div>
-                    <ul>
-                      <li v-for="comment, i in comments" :key="'B' + i" class="comment-modal">
-                          <span class="username-comment-modal">
-                              {{ comment.username }} 
-                          </span> 
-                          <p class="comment-text-modal">
-                              {{ comment.text }}
-                          </p>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div class="footer-comments">
-                    TEST
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            </div>
-          </div>
-          </div>
-        </div>
-        </transition>
-      </div>
-
-        <!-- MODAL -->
-        <!-- <modal name="container-comments">
-            <div class="comments-container-modal">
-              <h2>Commenti</h2>
-                <div v-for="comment, i in comments" :key="'B' + i" class="comment-modal">
-                    <span class="username-comment-modal">
-                        {{ comment.username }} 
-                    </span> 
-                    <p class="comment-text-modal">
-                        {{ comment.text }}
-                    </p>
-                </div>
-            </div>
-        </modal> -->
+        <CommentsModal v-if="myModel"
+        :post="post"
+        :comments="comments"
+        @closeModal="closeModal"
+        />
     </section>
 </template>
 
 <script>
 import axios from 'axios';
+import CommentsModal from './CommentsModal.vue';
 import Post from './Post.vue';
 
 export default {
     name: 'Posts',
-    components: { Post },
+    components: { Post, CommentsModal },
 
 
   data() {
@@ -199,124 +124,6 @@ export default {
       display: inline-block;
       margin: 5px 0;
     }
-  }
-}
-
-// MODAL
-#close-modal {    
-  color: #fff;
-  font-size: 26px;
-  font-weight: 600;
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  cursor: pointer;
-}
-
-.modal-content {
-  height: 100%;
-  border: 0;
-  border-radius: 0 4px 4px 0;
-  overflow: auto;
-}
-
-.modal-dialog {
-  height: 100%;
-  max-height: 100%;
-  max-width: 65%;
-  padding: 24px 64px;
-  overflow: auto;
-}
-
-.modal-body {
-  display: flex;
-  padding: 0;
-  background: transparent;
-  overflow: auto;
-}
-
-.container-image-post {
-  width: 55%;
-  overflow: auto;
-  // debug
-  height: 100%;
-  background-color: red;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-.container-info-post {
-  width: 45%;
-  overflow: auto;
-  // debug
-  height: 100%;
-  background-color: rgb(5, 82, 225);
-  color: #fff;
-
-  .header-comments, .main-comments {
-    padding: 14px 16px;
-  }
-
-  .header-comments {
-    background-color: #fff;
-    // height: 60px;
-    max-height: 60px;
-    border-bottom: 1px solid #efefef;
-    margin: 0;
-    border: 0;
-    border-radius: 0;
-
-    .header-post {
-      padding: 0;
-
-      & div:first-child span {
-        margin: 0;
-        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-
-        &#dot {
-          margin: 0 4px;
-        }
-      }
-
-      & > div:first-child img {
-        margin-right: 14px;
-      }
-    }
-  }
-
-  .main-comments {
-    height: calc(100% - 60px);
-    overflow: auto;
-
-    ul {
-      list-style: none;
-      padding: 0;
-
-      li {
-        margin: 0 0 16px;
-      }
-    }
-  }
-}
-
-.modal-wrapper {
-  animation: IGCoreModalShow .25s ease-out;
-}
-
-@keyframes IGCoreModalShow {
-  
-  0% {
-      opacity: 0;
-      transform: scale(1.1);
-  }
-  
-  100% {
-      opacity: 1;
-      transform: scale(1);
   }
 }
 

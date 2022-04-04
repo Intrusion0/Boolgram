@@ -23,10 +23,12 @@
         <div class="main-post">
             <!-- post actions  -->
             <div class="post-actions">
-                <i class="far fa-heart" @click.prevent="addLike()"></i>
-                <i class="far fa-comment"></i>
-                <img src="@/assets/svgexport-10.svg" alt="" class="share-post">
-                <img src="@/assets/svgexport-12.svg" alt="" class="float-end">
+                <div class="d-flex">
+                    <i class="far fa-heart" @click.prevent="addLike()"></i>
+                    <img src="@/assets/svgexport-7.svg" alt="comment icon" class="cta-post cta-comment">
+                    <img src="@/assets/svgexport-10.svg" alt="" class="cta-post share-post">
+                </div>
+                <img src="@/assets/svgexport-12.svg" alt="" class="cta-post float-end">
             </div>
 
             <!-- post likes  -->
@@ -184,27 +186,22 @@ export default {
 <style scoped lang="scss">
 
 .post-actions {
-    .share-post {
-        position: relative;
-        margin-left: 12px;
-        bottom: 3px;
-    }
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-.post-date {
-    letter-spacing: .2px;
-    color: #8e8e8e;
-    font-size: 10px;
-    line-height: 12px;
-    text-transform: uppercase;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    .cta-post {
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+    }
+
+    .cta-comment {
+        margin-right: 15px;
+    }
 }
 
 #text-likes {
     font-weight: 400;
-}
-
-.heart-bg {
-    color: red;
 }
 </style>
