@@ -98,6 +98,7 @@
 
         <!-- add comment  -->
         <div class="add-comment">
+            <img src="@/assets/svgexport-13.png" alt="emoji icon">
             <input @keyup.13="addComment(comment)" type="text" placeholder="Aggiungi un commento..." class="input-comment" v-model="comment">
             <button @click.prevent="addComment(comment)" class="post-comment" :disabled="comment === ''">Pubblica</button>
         </div>
@@ -123,7 +124,6 @@ export default {
 
   methods: {
       getDate(date) {
-          console.log(date);
           let finalDate = moment(date, "YYYYMMDD hh:mm:ss.ms").fromNow();
 
           if (finalDate === 'un giorno fa') {

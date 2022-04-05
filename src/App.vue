@@ -29,7 +29,11 @@ $color-default: #ededed;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 p {
@@ -63,7 +67,8 @@ p {
 
 // Center placeholder
 ::-webkit-input-placeholder {
-   color: #a7a7a7;
+  color: #262626;
+  opacity: .6;
 }
 
 // General Container
@@ -243,7 +248,7 @@ p {
         width: 90%;
         border: transparent;
         background-color: #fafafa;
-        font-size: 15px;
+        font-size: 14px;
 
         &:focus-visible {
             outline: none;
@@ -259,8 +264,13 @@ p {
         cursor: pointer;
 
         &:disabled {
-            color: #b2dffc;
+          color: #b2dffc;
         }
+    }
+
+    img {
+      padding-right: 16px;
+      cursor: pointer;
     }
 }
 
