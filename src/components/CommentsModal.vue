@@ -10,10 +10,6 @@
 
             <div class="modal-dialog">
             <div class="modal-content">
-
-            <!-- <div class="modal-header">
-                <h2>Commenti</h2>
-            </div> -->
             
             <div class="modal-body">
                 <div class="container-image-post">
@@ -37,19 +33,65 @@
                     </div>
                     </div>
                 </div>
-                <div class="main-comments">
 
+                <div class="main-comments">
                     <div class="container-comments-modal">
-                    <ul>
+
+                      <!-- Post description -->
+                      <div class="post-description-modal">
+                        <div class="ms-container-left">
+                          <img :src="post.profile_picture" :alt="post.profile_name" class="profile-picture-comment">
+                        </div>
+
+                        <div class="ms-container-right">
+                          <span>
+                            {{ post.profile_name }}
+                          </span>
+                          <p>
+                            {{ post.post_text }}
+                          </p>
+                          <div class="w-100">
+                            <span>
+                              10 m
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Comments -->
+                      <ul>
                         <li v-for="comment, i in comments" :key="'B' + i" class="comment-modal">
-                            <span class="username-comment-modal">
-                                {{ comment.username }} 
-                            </span> 
-                            <p class="comment-text-modal">
-                                {{ comment.text }}
+
+                          <div class="ms-container-left">
+                            <img src="@/assets/default-user.png" alt="default user icon">
+                          </div>
+
+                          <div class="ms-container-right">
+                            <span>
+                              {{ comment.username }} 
+                            </span>
+                            <p>
+                              {{ comment.text }}
                             </p>
+                            <div class="w-100">
+                              <span>  <!-- Metodo per ritornare un elemento random da un array |||| IO LO METTEREI FISSO, so che non è bellissimo, però si evita il bug dell'aggiornamento dei dati.. purtroppo non avendo i dati nell'api è così.. -->
+                                {{ dateComments[Math.floor(Math.random()*dateComments.length)] }} m
+                              </span>
+                              <span> <!-- Metodo per ritornare un elemento random da un array -->
+                                Piace a {{ likesComments[Math.floor(Math.random()*likesComments.length)] }} persone
+                              </span>
+                              <span>
+                                Rispondi
+                              </span>
+                            </div>
+                          </div>
+                          <div class="container-heart">
+                            <span>
+                              <i class="far fa-heart like-comment"></i>
+                            </span>
+                          </div>
                         </li>
-                    </ul>
+                      </ul>
                     </div>
 
                     <div class="footer-comments">
@@ -83,6 +125,7 @@
                         {{ getDate(post.date.date) }}
                     </span>
                     <div class="add-comment">
+                        <img src="@/assets/svgexport-13.png" alt="emoji icon">
                         <input @keyup.13="addComment(comment)" type="text" placeholder="Aggiungi un commento..." class="input-comment" v-model="comment">
                         <button @click.prevent="addComment(comment)" class="post-comment" :disabled="comment === ''">Pubblica</button>
                     </div>
@@ -112,12 +155,17 @@ export default {
   data() {
     return {
         comment: '',
+        dateComments: [],
+        likesComments: []
     }
+  },
+
+  mounted() {
+    this.getRandomInt();
   },
 
   methods: {
       getDate(date) {
-          console.log(date);
           let finalDate = moment(date, "YYYYMMDD hh:mm:ss.ms").fromNow();
 
           if (finalDate === 'un giorno fa') {
@@ -135,19 +183,18 @@ export default {
               username: this.post.profile_name
           };
           
-          if (this.$el.querySelector('.heart-bg')) {
-              this.$el.querySelector('.fa-heart').classList.remove('fas','heart-bg');
-              this.$el.querySelector('.fa-heart').classList.add('far');
+          if (this.$el.querySelector('.post-actions div .heart-bg')) {
+              this.$el.querySelector('.post-actions div .fa-heart').classList.remove('fas','heart-bg');
+              this.$el.querySelector('.post-actions div .fa-heart').classList.add('far');
               this.post.likes.splice(this.post.likes.length-1, 1);
           } else {
-              this.$el.querySelector('.fa-heart').classList.remove('far');
-              this.$el.querySelector('.fa-heart').classList.add('fas','heart-bg');
+              this.$el.querySelector('.post-actions div .fa-heart').classList.remove('far');
+              this.$el.querySelector('.post-actions div .fa-heart').classList.add('fas','heart-bg');
               this.post.likes.push(like);
           }
       },
 
       addComment(comment) {
-          console.log('ciao', comment);
           this.post.comments.push(
             {
               text: comment,
@@ -155,11 +202,19 @@ export default {
             }
           );
           this.comment = '';
-          console.log(this.post.comments);
       },
 
       closeModal() {
           this.$emit('closeModal');
+      },
+
+      getRandomInt() {
+        for (let i = 0; i < this.comments.length; i++) {
+          this.dateComments.push(Math.floor(Math.random() * 60)); // Numero random per la data del commento
+          this.likesComments.push(Math.floor(Math.random() * 150)); // Numero random per i like del commento
+        }
+        console.log(this.dateComments);
+        console.log(this.likesComments);
       }
   }
 }
@@ -203,9 +258,6 @@ export default {
 .container-image-post {
   width: 55%;
   overflow: auto;
-  // debug
-  height: 100%;
-  background-color: red;
 
   img {
     width: 100%;
@@ -217,10 +269,6 @@ export default {
 .container-info-post {
   width: 45%;
   overflow: auto;
-  // debug
-  height: 100%;
-  background-color: rgb(5, 82, 225);
-  color: #fff;
 
   .header-comments, .main-comments {
     padding: 14px 16px;
@@ -231,8 +279,10 @@ export default {
     // height: 60px;
     max-height: 60px;
     border-bottom: 1px solid #efefef;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
     margin: 0;
-    border: 0;
     border-radius: 0;
 
     .header-post {
@@ -259,17 +309,89 @@ export default {
     padding: 0;
 
     .container-comments-modal {
-      height: calc(100% - 156.5px);
+      height: calc(100% - 162.5px);
       padding: 14px 16px;
       overflow: auto;
+
+      .post-description-modal, li {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 12px 0;
+
+        .ms-container-left {
+          width: 50px;
+          
+          img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+
+            &.profile-picture-comment {
+              border: 3px solid #c62d90;
+              padding: 1px;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .ms-container-right {
+          width: calc(100% - 80px);
+          display: flex;
+          flex-wrap: wrap;
+
+          span, p {
+            font-size: 14px;
+            color: #262626;
+          }
+  
+          span {
+            font-weight: 600;
+          }
+  
+          p {
+            font-weight: 400;
+            margin-left: 6px;
+          }
+  
+          div {
+            margin: 8px 0 4px;
+  
+            span {
+              font-size: 12px;
+              font-weight: 400;
+              margin-right: 12px;
+              color: #8e8e8e;
+
+              &:nth-child(2), &:nth-child(3) {
+                font-weight: 600;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+
+      .container-heart {
+        width: 30px;
+        text-align: right;
+
+        .like-comment {
+          font-size: 12px;
+          cursor: pointer;
+        }
+      }
 
       ul {
         list-style: none;
         padding: 0;
   
         li {
-          margin: 0 0 16px;
+          padding-bottom: 0;
         }
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
       }
     }
 
@@ -281,11 +403,15 @@ export default {
       .post-actions {
         display: flex;
         justify-content: space-between;
-        padding: 8px 16px;
+        padding: 10px 16px;
         color: #000;
 
         img.cta-modal {
           margin-right: 16px;
+        }
+
+        img {
+          cursor: pointer;
         }
 
         div {
@@ -293,8 +419,9 @@ export default {
             align-items: center;
 
             i {
-                font-size: 22px;
+                font-size: 24px;
                 margin-right: 16px;
+                cursor: pointer;
             }
         }
 
@@ -310,7 +437,6 @@ export default {
         }
 
         span {
-          margin-left: 5px;
           color: #262626;
           font-size: 14px;
           font-weight: 400;
@@ -323,6 +449,10 @@ export default {
           #text-likes {
             font-weight: 400;
           }
+        }
+
+        & > span {
+          margin-left: 5px;
         }
       }
 
