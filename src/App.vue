@@ -58,6 +58,55 @@ p {
   vertical-align: middle;
 }
 
+.close-modal {    
+  color: #fff;
+  font-size: 26px;
+  font-weight: 600;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.modal-content {
+  height: 100%;
+  border: 0;
+  border-radius: 0 4px 4px 0;
+  overflow: auto;
+}
+
+.modal-dialog {
+  height: 100%;
+  max-height: 100%;
+  max-width: 65%;
+  padding: 24px 64px;
+  overflow: auto;
+}
+
+.modal-body {
+  display: flex;
+  padding: 0;
+  background: transparent;
+  overflow: auto;
+}
+
+.modal-wrapper {
+  animation: IGCoreModalShow .25s ease-out;
+}
+
+@keyframes IGCoreModalShow {
+  
+  0% {
+      opacity: 0;
+      transform: scale(1.1);
+  }
+  
+  100% {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
 // Clearfix / float
 .clearfix::after {
   display: table;

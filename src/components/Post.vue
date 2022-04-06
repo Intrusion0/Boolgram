@@ -44,7 +44,9 @@
                         <span id="text-likes"> 
                             e 
                         </span> 
-                        {{ post.likes.length-1 }} altri 
+                        <span @click.prevent="showLikes()" >
+                            {{ post.likes.length-1 }} altri 
+                        </span>
                     </span>
                 </span>
             </div>
@@ -168,17 +170,21 @@ export default {
         this.$emit('getComments', this.post.comments, this.post);
       },
 
-      hideComments() {
-        this.$modal.hide('container-comments');
-      },
-
-      showStory() {
-        this.$modal.show('container-story');
-      },
-
-      hideStory() {
-        this.$modal.hide('container-story');
+      showLikes() {
+        this.$emit('getLikes', this.post.likes);
       }
+
+    //   hideComments() {
+    //     this.$modal.hide('container-comments');
+    //   },
+
+    //   showStory() {
+    //     this.$modal.show('container-story');
+    //   },
+
+    //   hideStory() {
+    //     this.$modal.hide('container-story');
+    //   }
   }
 }
 </script>

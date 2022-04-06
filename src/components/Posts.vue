@@ -19,12 +19,18 @@
         :key="i"
         :post="post"
         @getComments="getComments"
+        @getLikes="getLikes"
         />
 
-        <CommentsModal v-if="myModel"
+        <CommentsModal v-if="commentsModal"
         :post="post"
         :comments="comments"
         @closeModal="closeModal"
+        />
+
+        <LikesModal v-if="likesModal"
+        :likes="likes"
+        @closeModalLikes="closeModalLikes"
         />
     </section>
 </template>
@@ -33,10 +39,11 @@
 import axios from 'axios';
 import CommentsModal from './CommentsModal.vue';
 import Post from './Post.vue';
+import LikesModal from './LikesModal.vue';
 
 export default {
     name: 'Posts',
-    components: { Post, CommentsModal },
+    components: { Post, CommentsModal, LikesModal },
 
 
   data() {
@@ -44,7 +51,9 @@ export default {
         posts: [],
         comments: [],
         post: [],
-        myModel: false
+        likes: [],
+        commentsModal: false,
+        likesModal: false
     }
   },
   created() {
@@ -68,17 +77,32 @@ export default {
 
       this.comments = value1;
       this.post = value2;
-      this.myModel = true;
+      this.commentsModal = true;
 
       console.log(value1);
       console.log(value2);
+    },
+
+    getLikes(value) {
+      const body = document.querySelector("body");
+      body.style.overflow = "hidden";
+
+      this.likes = value;
+      this.likesModal = true;
     },
 
     closeModal() {
       const body = document.querySelector("body");
       body.style.overflow = "auto";
 
-      this.myModel = false;
+      this.commentsModal = false;
+    },
+
+    closeModalLikes() {
+      const body = document.querySelector("body");
+      body.style.overflow = "auto";
+
+      this.likesModal = false;
     }
   }
 }

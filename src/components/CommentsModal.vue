@@ -4,7 +4,7 @@
         <div class="modal-mask">
             <div class="modal-wrapper">
 
-            <span id="close-modal" @click.prevent="closeModal">
+            <span class="close-modal" @click.prevent="closeModal">
                 &#10005;
             </span>
 
@@ -74,11 +74,8 @@
                               {{ comment.text }}
                             </p>
                             <div class="w-100">
-                              <span>  <!-- Metodo per ritornare un elemento random da un array |||| IO LO METTEREI FISSO, so che non è bellissimo, però si evita il bug dell'aggiornamento dei dati.. purtroppo non avendo i dati nell'api è così.. -->
-                                {{ dateComments[Math.floor(Math.random()*dateComments.length)] }} m
-                              </span>
-                              <span> <!-- Metodo per ritornare un elemento random da un array -->
-                                Piace a {{ likesComments[Math.floor(Math.random()*likesComments.length)] }} persone
+                              <span> 
+                                2 giorni fa
                               </span>
                               <span>
                                 Rispondi
@@ -155,13 +152,7 @@ export default {
   data() {
     return {
         comment: '',
-        dateComments: [],
-        likesComments: []
     }
-  },
-
-  mounted() {
-    this.getRandomInt();
   },
 
   methods: {
@@ -206,54 +197,12 @@ export default {
 
       closeModal() {
           this.$emit('closeModal');
-      },
-
-      getRandomInt() {
-        for (let i = 0; i < this.comments.length; i++) {
-          this.dateComments.push(Math.floor(Math.random() * 60)); // Numero random per la data del commento
-          this.likesComments.push(Math.floor(Math.random() * 150)); // Numero random per i like del commento
-        }
-        console.log(this.dateComments);
-        console.log(this.likesComments);
       }
   }
 }
 </script>
 
 <style scoped lang="scss">
-
-// MODAL
-#close-modal {    
-  color: #fff;
-  font-size: 26px;
-  font-weight: 600;
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  cursor: pointer;
-}
-
-.modal-content {
-  height: 100%;
-  border: 0;
-  border-radius: 0 4px 4px 0;
-  overflow: auto;
-}
-
-.modal-dialog {
-  height: 100%;
-  max-height: 100%;
-  max-width: 65%;
-  padding: 24px 64px;
-  overflow: auto;
-}
-
-.modal-body {
-  display: flex;
-  padding: 0;
-  background: transparent;
-  overflow: auto;
-}
 
 .container-image-post {
   width: 55%;
@@ -466,23 +415,6 @@ export default {
 .add-comment {
     margin-top: 14px;
     background-color: #fff;
-}
-
-.modal-wrapper {
-  animation: IGCoreModalShow .25s ease-out;
-}
-
-@keyframes IGCoreModalShow {
-  
-  0% {
-      opacity: 0;
-      transform: scale(1.1);
-  }
-  
-  100% {
-      opacity: 1;
-      transform: scale(1);
-  }
 }
 
 </style>
