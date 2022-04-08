@@ -53,7 +53,8 @@ export default {
         post: [],
         likes: [],
         commentsModal: false,
-        likesModal: false
+        likesModal: false,
+        
     }
   },
   created() {

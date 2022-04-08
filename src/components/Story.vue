@@ -19,13 +19,9 @@ export default {
   },
 
   methods: {
-    showStory () {
-        this.$modal.show('container-story');
+    showStory() {
+      this.$emit('showStory', this.details);
     },
-
-    hideStory () {
-        this.$modal.hide('container-story');
-    }
   }
 }
 </script>

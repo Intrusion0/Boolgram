@@ -17,48 +17,26 @@
         v-for="story, i in stories"
         :key="i"
         :details="story"
+        @showStory="showStory"
         />
 
-        <!-- MODAL -->
-        <modal name="container-story"
-        :top="150"
-        :height="700"
-        :width="500">
-            <div class="container-stories-modal">
-              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="@/assets/landscape.gif" class="d-block w-100" alt="default image story 1">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="@/assets/1.jpg" class="d-block w-100" alt="default image story 2">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="@/assets/2.jpg" class="d-block w-100" alt="default image story 3">
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-            </div>
-        </modal>
+        <StoryModal v-if="storyModal"
+        :story="story"
+        @closeModalStory="closeModalStory"
+         />
     </section>
 </template>
 
 <script>
 import axios from 'axios';
 import Story from './Story.vue';
+import StoryModal from './StoryModal.vue';
 
 export default {
   name: 'Stories',
   components: {
     Story,
+    StoryModal,
   },
 
   data() {
@@ -66,6 +44,8 @@ export default {
       stories: [],
       storiesDefault: [1,2,3,4,5,6,7,8],
       imageStory: '',
+      storyModal: false,
+      story: []
     }
   },
 
@@ -83,6 +63,21 @@ export default {
           })
           .catch((e) => console.error(e));
     },
+
+    closeModalStory() {
+      const body = document.querySelector("body");
+      body.style.overflow = "auto";
+
+      this.storyModal = false;
+    },
+
+    showStory(value) {
+      const body = document.querySelector("body");
+      body.style.overflow = "hidden";
+
+      this.story = value;
+      this.storyModal = true;
+    }
   }
 }
 </script>

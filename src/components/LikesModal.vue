@@ -4,7 +4,6 @@
         <div class="modal-mask">
             <div class="modal-wrapper">
 
-
                 <div class="modal-dialog">
                     <div class="modal-content">
             
@@ -29,6 +28,10 @@
                                         <span>
                                             {{ like.username }}
                                         </span>
+
+                                        <button>
+                                            Segui
+                                        </button>
                                     </li>
                                 </ul>
                             </div>
@@ -66,66 +69,88 @@ export default {
 
 <style scoped lang="scss">
 .modal-dialog {
-  max-width: 27%;
-  height: 570px;
-}
+    max-width: 27%;
+    height: 570px;
 
-.modal-content {
-  border-radius: 12px;
-}
-
-.modal-body {
-    display: block;
-
-        .container-title {
-        width: 100%;
-        height: 42px;
+    .modal-content {
+    border-radius: 12px;
+    
+    .modal-body {
         display: block;
-        border-bottom: 1px solid #dbdbdb;
-    
-        & span:first-child {
+
+            .container-title {
+            width: 100%;
+            height: 42px;
             display: block;
-            text-align: center;
-            font-size: 20px;
-            font-weight: 600;
-            color: #262626;
-            padding-top: 6px;
-        }
-    
-        .close-modal {
-            color: #000;
-            top: 2px;
-            font-size: 24px;
-        }
-    }
-    
-    .likes-list {
-        height: calc(100% - 42px);
-        overflow: auto;
-
-        ul {
-            list-style: none;
-            padding: 0 16px;
-    
-            li {
-                padding: 5px 0;
-    
-                div {
-                    display: inline-block;
-
-                    img {
-                        width: 44px;
-                        height: 44pX;
-                        border-radius: 50%;
-                    }
-                }
-                
+            border-bottom: 1px solid #dbdbdb;
+        
+            & span:first-child {
+                display: block;
+                text-align: center;
+                font-size: 20px;
+                font-weight: 600;
+                color: #262626;
+                padding-top: 6px;
+            }
+        
+            .close-modal {
+                color: #000;
+                top: 2px;
+                font-size: 24px;
             }
         }
+        
+        .likes-list {
+            height: calc(100% - 42px);
+            overflow: auto;
 
-        &::-webkit-scrollbar {
-            display: none;
+            ul {
+                list-style: none;
+                padding: 0 16px;
+        
+                li {
+                    padding: 5px 0;
+                    
+        
+                    div {
+                        display: inline-block;
+
+                        img {
+                            width: 44px;
+                            height: 44pX;
+                            border-radius: 50%;
+                            margin-right: 10px;
+                        }
+                    }
+
+                    span, img {
+                        cursor: pointer;
+                    }
+
+                    button {
+                        background-color: #0095f6;
+                        border: 1px solid transparent;
+                        border-radius: 4px;
+                        color: #fff;
+                        font-size: 14px;
+                        font-weight: 600;
+                        padding: 5px 9px;
+                        cursor: pointer;
+                        float: right;
+                        top: 5px;
+                        position: relative;
+                    }
+                    
+                }
+            }
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
     }
+    }
 }
+
+
 </style>
