@@ -25,7 +25,7 @@
             <div class="post-actions">
                 <div class="d-flex">
                     <i class="far fa-heart" @click.prevent="addLike()"></i>
-                    <img src="@/assets/svgexport-7.svg" alt="comment icon" class="cta-post cta-comment">
+                    <img src="@/assets/svgexport-7.svg" @click.prevent="showComments()" alt="comment icon" class="cta-post cta-comment">
                     <img src="@/assets/svgexport-10.svg" alt="" class="cta-post share-post">
                 </div>
                 <img src="@/assets/svgexport-12.svg" alt="" class="cta-post float-end">
