@@ -121,8 +121,17 @@
                     <span class="post-date">
                         {{ getDate(post.date.date) }}
                     </span>
+
+                    <VEmojiPicker
+                    v-show="showDialog"
+                    :style="{ width: '440px', height: '200' }"
+                    labelSearch="Search"
+                    lang="pt-BR"
+                    @select="onSelectEmoji"
+                    />
+
                     <div class="add-comment">
-                        <img src="@/assets/svgexport-13.png" alt="emoji icon">
+                        <img src="@/assets/svgexport-13.png" @click.prevent="toogleDialogEmoji" alt="emoji icon">
                         <input @keyup.13="addComment(comment)" type="text" placeholder="Aggiungi un commento..." class="input-comment" v-model="comment">
                         <button @click.prevent="addComment(comment)" class="post-comment" :disabled="comment === ''">Pubblica</button>
                     </div>
@@ -141,17 +150,29 @@
 
 <script>
 import moment from 'moment';
+import { VEmojiPicker, emojisDefault, categoriesDefault } from "v-emoji-picker";
 
 export default {
   name: 'Post',
+
+  components: {
+    VEmojiPicker
+  },
+
   props: {
       post: Object,
       comments: Array
   },
 
+  mounted() {
+    console.log(categoriesDefault);
+    console.log("Total emojis:", emojisDefault.length);
+  },
+
   data() {
     return {
         comment: '',
+        showDialog: false
     }
   },
 
@@ -193,11 +214,31 @@ export default {
             }
           );
           this.comment = '';
+          this.showDialog = false;
+
+          this.scrollToEnd();
       },
 
       closeModal() {
           this.$emit('closeModal');
-      }
+      },
+
+      toogleDialogEmoji() {
+        this.showDialog = !this.showDialog;
+      },
+
+      onSelectEmoji(emoji) {
+        this.comment += emoji.data;
+      },
+
+      scrollToEnd() {
+      var containerComments = this.$el.querySelector(".container-comments-modal");
+
+      containerComments.scrollTop = containerComments.scrollHeight;
+
+      console.log('ciao');
+    },
+
   }
 }
 </script>
@@ -218,6 +259,7 @@ export default {
 .container-info-post {
   width: 45%;
   overflow: auto;
+  position: relative;
 
   .header-comments, .main-comments {
     padding: 14px 16px;

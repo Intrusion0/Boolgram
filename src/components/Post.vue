@@ -98,9 +98,17 @@
 
         </div>
 
+        <VEmojiPicker
+        v-show="showDialog"
+        :style="{ width: '440px', height: '200' }"
+        labelSearch="Search"
+        lang="pt-BR"
+        @select="onSelectEmoji"
+        />
+
         <!-- add comment  -->
         <div class="add-comment">
-            <img src="@/assets/svgexport-13.png" alt="emoji icon">
+            <img src="@/assets/svgexport-13.png" @click.prevent="toogleDialogEmoji" alt="emoji icon">
             <input @keyup.13="addComment(comment)" type="text" placeholder="Aggiungi un commento..." class="input-comment" v-model="comment">
             <button @click.prevent="addComment(comment)" class="post-comment" :disabled="comment === ''">Pubblica</button>
         </div>
@@ -110,9 +118,15 @@
 
 <script>
 import moment from 'moment';
+import { VEmojiPicker, emojisDefault, categoriesDefault } from "v-emoji-picker";
 
 export default {
   name: 'Post',
+
+  components: {
+    VEmojiPicker
+  },
+
   props: {
       post: Object,
   },
@@ -120,8 +134,14 @@ export default {
   data() {
     return {
         comment: '',
-        postComment: []
+        postComment: [],
+        showDialog: false
     }
+  },
+
+  mounted() {
+    console.log(categoriesDefault);
+    console.log("Total emojis:", emojisDefault.length);
   },
 
   methods: {
@@ -155,15 +175,14 @@ export default {
       },
 
       addComment(comment) {
-          console.log('ciao', comment);
           this.post.comments.push(
             {
-              text: comment,
+              text: comment, 
               username: this.post.profile_name
             }
           );
           this.comment = '';
-          console.log(this.post.comments);
+          this.showDialog = false;
       },
 
       showComments() {
@@ -172,19 +191,15 @@ export default {
 
       showLikes() {
         this.$emit('getLikes', this.post.likes);
+      },
+
+      toogleDialogEmoji() {
+        this.showDialog = !this.showDialog;
+      },
+
+      onSelectEmoji(emoji) {
+        this.comment += emoji.data;
       }
-
-    //   hideComments() {
-    //     this.$modal.hide('container-comments');
-    //   },
-
-    //   showStory() {
-    //     this.$modal.show('container-story');
-    //   },
-
-    //   hideStory() {
-    //     this.$modal.hide('container-story');
-    //   }
   }
 }
 </script>

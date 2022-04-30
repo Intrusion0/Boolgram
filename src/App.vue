@@ -152,6 +152,10 @@ p {
 }
 
 // General rules -> component post
+.post {
+  position: relative;
+}
+
 .post, .header-comments {
     margin: 25px 0;
     border: 2px solid #efefef;
@@ -417,6 +421,34 @@ p {
 
 .heart-bg {
     color: red;
+}
+
+// Emoji picker
+#EmojiPicker {
+  max-width: 310px;
+  height: 340px;
+  position: absolute;
+  background: rgb(255, 255, 255);
+  bottom: 55px;
+  left: 0;
+
+  #Categories {
+    overflow-x: visible;
+    background: #f3f3f3;
+  }
+
+  .container-search {
+    display: none;
+  }
+
+  .container-emoji {
+    height: 300px;
+    max-height: 300px;
+  }
+
+  .emoji {
+    border: 0 !important;
+  }
 }
 
 </style>
