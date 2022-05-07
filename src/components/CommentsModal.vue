@@ -207,12 +207,14 @@ export default {
       },
 
       addComment(comment) {
-          this.post.comments.push(
+          if (comment != '' && comment.trim()) {
+            this.post.comments.push(
             {
-              text: comment,
+              text: comment, 
               username: this.post.profile_name
             }
-          );
+            );
+          }
           this.comment = '';
           this.showDialog = false;
 

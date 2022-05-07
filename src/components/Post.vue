@@ -175,14 +175,18 @@ export default {
       },
 
       addComment(comment) {
+
+        if (comment != '' && comment.trim()) {
           this.post.comments.push(
-            {
-              text: comment, 
-              username: this.post.profile_name
-            }
+          {
+            text: comment, 
+            username: this.post.profile_name
+          }
           );
-          this.comment = '';
-          this.showDialog = false;
+        }
+
+        this.comment = '';
+        this.showDialog = false;
       },
 
       showComments() {
