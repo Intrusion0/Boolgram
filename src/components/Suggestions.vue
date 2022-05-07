@@ -41,9 +41,15 @@
           </div>
 
           <!-- Profile cta (call to action) -->
-          <span class="cta">
-            Segui
-          </span>
+          <div @click="follow(i)">
+            <span v-if="idProfile.includes(i)" class="cta_follow cta">
+              Segui gi&agrave;
+            </span>
+
+            <span v-else class="cta">
+              Segui
+            </span>
+          </div>
         </div>
       </div>
   </section>
@@ -58,7 +64,8 @@ export default {
   data() {
     return {
       suggestedProfiles: [],
-      defaultSuggestedProfiles: [1,2,3,4,5,6,7,8]
+      defaultSuggestedProfiles: [1,2,3,4,5,6,7,8],
+      idProfile: []
     }
   },
 
@@ -75,7 +82,17 @@ export default {
             }, 1500);
           })
           .catch((e) => console.error(e));
-    }
+    },
+
+    follow(id) {
+
+      if(!this.idProfile.includes(id)) {
+        this.idProfile.push(id);
+      } else {
+        let index = this.idProfile.findIndex( el => el == id );
+        this.idProfile.splice(index, 1);
+      }
+    },
   }
 }
 </script>
@@ -113,6 +130,10 @@ export default {
       justify-content: space-between;
       align-items: center;
       margin: 10px 0;
+
+      .cta_follow {
+        color: #000;
+      }
 
       .container-profile {
         display: flex;
