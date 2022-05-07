@@ -41,7 +41,7 @@
           </div>
 
           <!-- Profile cta (call to action) -->
-          <span class="cta">
+          <span class="cta follow">
             Segui
           </span>
         </div>

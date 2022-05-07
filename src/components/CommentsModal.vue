@@ -132,7 +132,7 @@
 
                     <div class="add-comment">
                         <img src="@/assets/svgexport-13.png" @click.prevent="toogleDialogEmoji" alt="emoji icon">
-                        <input @keyup.13="addComment(comment)" type="text" placeholder="Aggiungi un commento..." class="input-comment" v-model="comment">
+                        <input @keyup.13="addComment(comment)" @click.prevent="CloseEmojiPicker" type="text" placeholder="Aggiungi un commento..." class="input-comment" v-model="comment">
                         <button @click.prevent="addComment(comment)" class="post-comment" :disabled="comment === ''">Pubblica</button>
                     </div>
                     </div>
@@ -238,6 +238,10 @@ export default {
 
       console.log('ciao');
     },
+
+    CloseEmojiPicker() {
+        this.showDialog = false;
+     }
 
   }
 }
